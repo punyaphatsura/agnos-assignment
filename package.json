@@ -1,5 +1,5 @@
 {
-  "name": "ss-sopet",
+  "name": "agnos-assignment",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -22,10 +22,11 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
-    "eslint": "^8.7.0",
+    "eslint": "^8.56.0",
     "eslint-config-next": "14.0.4",
     "postcss": "^8",
-    "prettier": "^2.5.1",
+    "prettier": "^3.2.4",
+    "prettier-plugin-tailwindcss": "^0.5.11",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   }
