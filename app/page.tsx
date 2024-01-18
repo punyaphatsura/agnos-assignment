@@ -27,14 +27,18 @@ export default function Home() {
     //   Math.round(((position[1] - parent.offsetTop) / parent.getBoundingClientRect().height) * 589),
     //   '},'
     // );
+    const relativePosition = {
+      x: position[0] - parent.offsetLeft,
+      y: position[1] - parent.offsetTop,
+    };
     if (page === 'abs') {
       absPainArea.forEach((area) => {
         if (
           isPointInPoly(
             area.points[0],
             {
-              x: position[0] - parent.offsetLeft,
-              y: position[1] - parent.offsetTop,
+              x: relativePosition.x,
+              y: relativePosition.y,
             },
             [parent.getBoundingClientRect().width, parent.getBoundingClientRect().height]
           )
@@ -56,8 +60,8 @@ export default function Home() {
             isPointInPoly(
               point,
               {
-                x: position[0] - parent.offsetLeft,
-                y: position[1] - parent.offsetTop,
+                x: relativePosition.x,
+                y: relativePosition.y,
               },
               [parent.getBoundingClientRect().width, parent.getBoundingClientRect().height]
             )
@@ -109,7 +113,7 @@ export default function Home() {
     <div className="relative flex h-screen w-full flex-col items-center justify-center">
       <div
         id="card"
-        className="relative mb-4 h-auto w-[300px] rounded-2xl bg-white shadow-2xl sm:mb-6 sm:h-[589px] sm:w-[500px]">
+        className="relative mb-4 h-auto w-[300px] rounded-2xl bg-white shadow-2xl transition-all sm:mb-6 sm:h-[589px] sm:w-[500px]">
         <PositionCanvas setPosition={setPosition} />
         <div className="absolute w-full pt-1 text-center text-sm font-semibold sm:pt-4 sm:text-xl">
           จุดไหนที่คุณปวด{page === 'abs' ? 'ท้อง' : 'นิ้ว'}มากที่สุด
