@@ -69,7 +69,7 @@ const Page = () => {
     return c;
   };
   return (
-    <div className="relative flex h-screen w-full flex-col items-center justify-center">
+    <div className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden">
       <div
         id="card"
         className="relative mb-4 h-auto w-[300px] rounded-2xl bg-white shadow-2xl transition-all sm:mb-6 sm:h-[589px] sm:w-[500px]">
