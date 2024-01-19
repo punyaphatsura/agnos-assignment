@@ -1,14 +1,15 @@
 'use client';
 
+import React, { useState, useEffect } from 'react';
+
 import AbsPain from './_components/absPain';
 import FingerPain from './_components/fingerPain';
 import PositionCanvas from './_components/positionCanvas';
+
 import absPosition from './_config/abs-position.json';
 import fingerPosition from './_config/finger-position.json';
 
-import React, { useState, useEffect } from 'react';
-
-export default function Home() {
+export default function Page() {
   const [page, setPage] = useState<'abs' | 'finger'>('abs');
   const [position, setPosition] = useState<number[]>([0, 0]);
   const [absSelected, setAbsSelected] = useState<string>('');
@@ -85,9 +86,6 @@ export default function Home() {
     if (page === 'abs') {
       setAbsSelected('');
       setPage('finger');
-    } else {
-      setFingerSelected('');
-      setPage('abs');
     }
     setPosition([0, 0]);
   };
@@ -126,9 +124,8 @@ export default function Home() {
         ${absSelected !== '' || fingerSelected !== '' ? 'cursor-pointer bg-gradient-to-b from-blue-600 to-cyan-400 text-white hover:opacity-50' : 'bg-gray-200 text-gray-400'}`}
         onClick={() => {
           if (page === 'abs' && absSelected !== '') clickHandle();
-          if (page === 'finger' && fingerSelected !== '') clickHandle();
         }}>
-        <p className="select-none">ต่อไป</p>
+        <p className="select-none">{page === 'abs' ? 'ต่อไป' : 'ยืนยัน'}</p>
       </div>
     </div>
   );

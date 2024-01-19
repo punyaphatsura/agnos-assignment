@@ -87,7 +87,7 @@ const Page = () => {
         onClick={() => {
           if (fingerSelected !== '') clickHandler();
         }}>
-        <p className="select-none">ต่อไป</p>
+        <p className="select-none">ยืนยัน</p>
       </div>
     </div>
   );
