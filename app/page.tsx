@@ -29,14 +29,10 @@ export default function Page() {
     if (page === 'abs') {
       absPainArea.forEach((area) => {
         if (
-          isPointInPoly(
-            area.points[0],
-            {
-              x: relativePosition.x,
-              y: relativePosition.y,
-            },
-            [parent.getBoundingClientRect().width, parent.getBoundingClientRect().height]
-          )
+          isPointInPoly(area.points[0], {
+            x: relativePosition.x,
+            y: relativePosition.y,
+          })
         ) {
           console.log(area.name);
           setAbsSelected((prevSelected) => {
@@ -52,14 +48,10 @@ export default function Page() {
       fingerPainArea.forEach((area) => {
         area.points.forEach((point) => {
           if (
-            isPointInPoly(
-              point,
-              {
-                x: relativePosition.x,
-                y: relativePosition.y,
-              },
-              [parent.getBoundingClientRect().width, parent.getBoundingClientRect().height]
-            )
+            isPointInPoly(point, {
+              x: relativePosition.x,
+              y: relativePosition.y,
+            })
           ) {
             console.log(area.name);
             setFingerSelected((prevSelected) => {
@@ -84,11 +76,7 @@ export default function Page() {
     setPosition([0, 0]);
   };
 
-  const isPointInPoly = (
-    poly: { x: number; y: number }[],
-    pt: { x: number; y: number },
-    bnd: number[]
-  ) => {
+  const isPointInPoly = (poly: { x: number; y: number }[], pt: { x: number; y: number }) => {
     for (var c = false, i = -1, l = poly.length, j = l - 1; ++i < l; j = i) {
       ((poly[i].y <= pt.y && pt.y < poly[j].y) || (poly[j].y <= pt.y && pt.y < poly[i].y)) &&
         pt.x <
