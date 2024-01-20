@@ -21,17 +21,11 @@ export default function Page() {
   useEffect(() => {
     const parent = document.getElementById('card');
     if (!parent) return;
-    // console.log(
-    //   '{"x":',
-    //   Math.round(((position[0] - parent.offsetLeft) / parent.getBoundingClientRect().width) * 500),
-    //   ',"y":',
-    //   Math.round(((position[1] - parent.offsetTop) / parent.getBoundingClientRect().height) * 589),
-    //   '},'
-    // );
     const relativePosition = {
-      x: position[0] - parent.offsetLeft,
-      y: position[1] - parent.offsetTop,
+      x: (position[0] * 500) / parent.getBoundingClientRect().width,
+      y: (position[1] * 589) / parent.getBoundingClientRect().height,
     };
+    console.log('{"x":', relativePosition.x, ',"y":', relativePosition.y, '},');
     if (page === 'abs') {
       absPainArea.forEach((area) => {
         if (
@@ -96,13 +90,9 @@ export default function Page() {
     bnd: number[]
   ) => {
     for (var c = false, i = -1, l = poly.length, j = l - 1; ++i < l; j = i) {
-      (((poly[i].y * bnd[1]) / 589 <= pt.y && pt.y < (poly[j].y * bnd[1]) / 589) ||
-        ((poly[j].y * bnd[1]) / 589 <= pt.y && pt.y < (poly[i].y * bnd[1]) / 589)) &&
+      ((poly[i].y <= pt.y && pt.y < poly[j].y) || (poly[j].y <= pt.y && pt.y < poly[i].y)) &&
         pt.x <
-          (((poly[j].x * bnd[0]) / 500 - (poly[i].x * bnd[0]) / 500) *
-            (pt.y - (poly[i].y * bnd[1]) / 589)) /
-            ((poly[j].y * bnd[1]) / 589 - (poly[i].y * bnd[1]) / 589) +
-            (poly[i].x * bnd[0]) / 500 &&
+          ((poly[j].x - poly[i].x) * (pt.y - poly[i].y)) / (poly[j].y - poly[i].y) + poly[i].x &&
         (c = !c);
     }
     return c;
