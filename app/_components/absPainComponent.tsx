@@ -60,28 +60,32 @@ const AbdominalPainComponent: FC<Props> = ({ selected }) => {
   const renderHighlight = () => {
     if (selected !== 'all-over' && selected) {
       return (
-        <Image
-          width={500}
-          height={500}
-          src={selected}
-          alt={selected}
-          className="absolute h-auto w-full select-none"
-          loader={highlightLoader}
-        />
+        <div key={selected}>
+          <Image
+            width={500}
+            height={500}
+            src={selected}
+            alt={selected}
+            className="absolute h-auto w-full animate-[fadeIn_0.3s_ease-in-out] select-none transition-opacity"
+            loader={highlightLoader}
+          />
+        </div>
       );
     } else if (selected === 'all-over') {
       return getAllOver.map((img, idx) => {
         return (
-          <Image
-            key={idx}
-            width={500}
-            height={500}
-            id="highlight"
-            src={img}
-            alt={img}
-            className="absolute h-auto w-full select-none"
-            loader={highlightLoader}
-          />
+          <div key={img}>
+            <Image
+              key={idx}
+              width={500}
+              height={500}
+              id="highlight"
+              src={img}
+              alt={img}
+              className="absolute h-auto w-full animate-[fadeIn_0.3s_ease-in-out] select-none transition-opacity"
+              loader={highlightLoader}
+            />
+          </div>
         );
       });
     }
@@ -90,14 +94,16 @@ const AbdominalPainComponent: FC<Props> = ({ selected }) => {
   const renderActive = () => {
     if (!selected.includes('all-over') && selected !== '') {
       return (
-        <Image
-          width={500}
-          height={500}
-          src={selected}
-          alt={selected}
-          className="absolute h-auto w-full select-none"
-          loader={activeLoader}
-        />
+        <div>
+          <Image
+            width={500}
+            height={500}
+            src={selected}
+            alt={selected}
+            className="absolute h-auto w-full animate-[fadeIn_0.3s_ease-in-out] select-none transition-opacity"
+            loader={activeLoader}
+          />
+        </div>
       );
     }
   };

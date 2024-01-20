@@ -18,8 +18,8 @@ const FingerPainComponent: FC<Props> = ({ selected }) => {
       })
       .concat(
         getAllOver.map((img) => {
-          if (img !== 'all-over') return `/images/${img}-active.png`;
-          return '/images/all-over-highlight.png';
+          if (img !== 'others') return `/images/${img}-active.png`;
+          return '/images/others-highlight.png';
         })
       )
   );
@@ -51,57 +51,54 @@ const FingerPainComponent: FC<Props> = ({ selected }) => {
   const renderHighlight = () => {
     if (selected !== 'others' && selected) {
       return (
-        <Image
-          width={500}
-          height={500}
-          src={selected}
-          alt={selected}
-          className="absolute h-auto w-full select-none"
-          loader={highlightLoader}
-        />
-      );
-    } else if (selected === 'others') {
-      return getAllOver.map((img, idx) => {
-        return (
+        <div key={selected}>
           <Image
-            key={idx}
             width={500}
             height={500}
-            src={img}
-            alt={img}
-            className="absolute h-auto w-full select-none"
+            src={selected}
+            alt={selected}
+            className="absolute h-auto w-full animate-[fadeIn_0.3s_ease-in-out] select-none transition-opacity"
             loader={highlightLoader}
           />
-        );
-      });
+        </div>
+      );
+    } else if (selected === 'others') {
+      return (
+        <div key={selected}>
+          <Image
+            width={500}
+            height={500}
+            src={'others'}
+            alt={'others'}
+            className="absolute h-auto w-full animate-[fadeIn_0.3s_ease-in-out] select-none transition-opacity"
+            loader={highlightLoader}
+          />
+        </div>
+      );
     }
   };
 
   const renderActive = () => {
     if (!selected.includes('others') && selected !== '') {
       return (
-        <Image
-          width={500}
-          height={500}
-          src={selected}
-          alt={selected}
-          className="absolute h-auto w-full select-none"
-          loader={activeLoader}
-        />
+        <div>
+          <Image
+            width={500}
+            height={500}
+            src={selected}
+            alt={selected}
+            className="absolute h-auto w-full animate-[fadeIn_0.3s_ease-in-out] select-none transition-opacity"
+            loader={activeLoader}
+          />
+        </div>
       );
     }
   };
 
   return (
-    <div className="relative z-20 -ml-px h-auto w-full max-w-[500px]">
-      {!imagesPreloaded ? (
-        <p>Preloading Assets</p>
-      ) : (
-        <>
-          {renderActive()}
-          {renderHighlight()}
-        </>
-      )}
+    <div className="relative z-20 -ml-px h-auto w-full max-w-[500px] transition-all">
+      {renderActive()}
+      {renderHighlight()}
     </div>
   );
 };

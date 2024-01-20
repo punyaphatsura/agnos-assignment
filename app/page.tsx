@@ -101,13 +101,16 @@ export default function Page() {
     <div className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden">
       <div
         id="card"
-        className="relative mb-4 h-auto w-[300px] rounded-2xl bg-white shadow-2xl transition-all sm:mb-6 sm:h-[589px] sm:w-[500px]">
+        className="relative mb-4 h-auto w-[300px] rounded-2xl bg-white shadow-2xl sm:mb-6 sm:h-[589px] sm:w-[500px]">
         <PositionCanvas setPosition={setPosition} />
         <div className="absolute w-full pt-1 text-center text-sm font-semibold sm:pt-4 sm:text-xl">
           จุดไหนที่คุณปวด{page === 'abs' ? 'ท้อง' : 'นิ้ว'}มากที่สุด
         </div>
-        {page === 'abs' && <AbsPain selected={absSelected} />}
-        {page === 'finger' && <FingerPain selected={fingerSelected} />}
+        {page === 'abs' ? (
+          <AbsPain selected={absSelected} />
+        ) : (
+          <FingerPain selected={fingerSelected} />
+        )}
       </div>
       <div
         className={`z-10 flex h-10 w-[300px] items-center justify-center rounded-xl text-sm font-semibold transition-all active:scale-95 sm:h-12 sm:w-[500px] sm:text-xl
