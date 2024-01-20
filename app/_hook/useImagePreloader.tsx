@@ -1,28 +1,26 @@
 import { useEffect, useState } from 'react';
 
-function preloadImage(src: string) {
+const preloadImage = (src: string) => {
   return new Promise((resolve, reject) => {
     const img = new Image();
     img.src = src;
-    img.onload = function () {
+    img.onload = () => {
       resolve(img);
     };
-    img.onerror = img.onabort = function () {
+    img.onerror = img.onabort = () => {
       reject(src);
     };
     img.src = src;
   });
-}
+};
 
-export default function useImagePreloader(imageList: string[]) {
+const useImagePreloader = (imageList: string[]) => {
   const [imagesPreloaded, setImagesPreloaded] = useState<boolean>(false);
 
   useEffect(() => {
     let isCancelled = false;
 
-    async function effect() {
-      console.log('PRELOAD');
-
+    const effect = async () => {
       if (isCancelled) {
         return;
       }
@@ -39,7 +37,7 @@ export default function useImagePreloader(imageList: string[]) {
       }
 
       setImagesPreloaded(true);
-    }
+    };
 
     effect();
 
@@ -49,4 +47,6 @@ export default function useImagePreloader(imageList: string[]) {
   }, [imageList]);
 
   return { imagesPreloaded };
-}
+};
+
+export default useImagePreloader;
