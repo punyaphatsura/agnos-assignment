@@ -11,7 +11,7 @@ import fingerPosition from './_config/finger-position.json';
 
 export default function Page() {
   const [page, setPage] = useState<'abs' | 'finger'>('abs');
-  const [position, setPosition] = useState<number[]>([0, 0]);
+  const [position, setPosition] = useState<number[] | null[]>([null, null]);
   const [absSelected, setAbsSelected] = useState<string>('');
   const [fingerSelected, setFingerSelected] = useState<string>('');
 
@@ -21,6 +21,7 @@ export default function Page() {
   useEffect(() => {
     const parent = document.getElementById('card');
     if (!parent) return;
+    if (!position[0] || !position[1]) return;
     const relativePosition = {
       x: (position[0] * 500) / parent.getBoundingClientRect().width,
       y: (position[1] * 589) / parent.getBoundingClientRect().height,
@@ -73,7 +74,7 @@ export default function Page() {
       setAbsSelected('');
       setPage('finger');
     }
-    setPosition([0, 0]);
+    setPosition([null, null]);
   };
 
   const isPointInPoly = (poly: { x: number; y: number }[], pt: { x: number; y: number }) => {
